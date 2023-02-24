@@ -17,9 +17,8 @@ def commit(tasks: list[Task], commits_dir: Path) -> None:
     json.dump(jsonify(tasks), open(commits_dir / f'{commit_number}.json', 'w'))
 
 
-def checkout(commits_dir: Path, commit_index: int = -1) -> list[Task]:
-    commits_numbers = list(map(lambda i: i.split('.')[0], os.listdir(commits_dir)))
-    filename = commits_dir / f'{sorted(commits_numbers)[commit_index]}.json'
+def checkout(commits_dir: Path, commit_number: int = -1) -> list[Task]:
+    filename = commits_dir / os.listdir(commits_dir)[commit_number]
     return list(map(lambda t: Task(**t), json.load(open(filename, 'w'))))
 
 
