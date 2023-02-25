@@ -17,6 +17,7 @@ class Task:
 class TaskSchema(Schema):
     id = fields.Int()
     name = fields.Str()
+    is_checked = fields.Bool()
     created_at = fields.DateTime()
 
     @post_load
@@ -59,7 +60,7 @@ def rm(index: int) -> list[Task]:
 def show(tasks: list[Task]) -> str:
     result = f'{"ID": ^5}{"NAME": ^50}{"CHECKED": ^4}'
     for task in tasks:
-        result += f'\n{task.id: ^5}{task.name: <50}{task.checked: ^5}'
+        result += f'\n{task.id: ^5}{task.name: <50}{"V" if task.is_checked else "X": ^5}'
     return result
 
 
