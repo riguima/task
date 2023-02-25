@@ -10,6 +10,7 @@ from pathlib import Path
 class Task:
     id: int
     name: str
+    is_checked: bool = False
     created_at: datetime = datetime.now()
 
 
@@ -53,6 +54,13 @@ def rm(index: int) -> list[Task]:
     tasks = checkout()
     tasks.pop(index)
     return tasks
+
+
+def show(tasks: list[Task]) -> str:
+    result = f'{"ID": ^5}{"NAME": ^50}{"CHECKED": ^4}'
+    for task in tasks:
+        result += f'\n{task.id: ^5}{task.name: <50}{task.checked: ^5}'
+    return result
 
 
 def get_commits_dir() -> Path:
