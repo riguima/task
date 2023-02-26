@@ -9,7 +9,7 @@ if __name__ == '__main__':
     match sys.argv[1]:
         case 'add':
             parser.add_argument('value', type=str)
-        case 'rm':
+        case 'rm' | 'check':
             parser.add_argument('value', type=int)
     args = parser.parse_args()
     try:

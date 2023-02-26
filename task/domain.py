@@ -8,14 +8,12 @@ from pathlib import Path
 
 @dataclass
 class Task:
-    id: int
     name: str
     is_checked: bool = False
     created_at: datetime = datetime.now()
 
 
 class TaskSchema(Schema):
-    id = fields.Int()
     name = fields.Str()
     is_checked = fields.Bool()
     created_at = fields.DateTime()
@@ -46,7 +44,14 @@ def checkout(index: int = -1) -> list[Task]:
 @commit
 def add(name: str) -> list[Task]:
     tasks = checkout()
-    tasks.append(Task(len(tasks) + 1, name))
+    tasks.append(Task(name))
+    return tasks
+
+
+@commit
+def check(index: int) -> list[Task]:
+    tasks = checkout()
+    tasks[index].is_checked = True
     return tasks
 
 
@@ -59,8 +64,8 @@ def rm(index: int) -> list[Task]:
 
 def show() -> None:
     result = f'{"ID": ^10}{"NAME": ^50}CHECKED'
-    for task in checkout():
-        result += f'\n{task.id: ^10}{task.name: <50}{"V" if task.is_checked else "X": ^7}'
+    for index, task in enumerate(checkout()):
+        result += f'\n{index: ^10}{task.name: <50}{"V" if task.is_checked else "X": ^7}'
     print(result)
 
 
