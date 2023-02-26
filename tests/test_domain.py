@@ -20,6 +20,6 @@ def test_checkout() -> None:
 
 
 def test_show() -> None:
-    expected = (f'{"ID": ^5}{"NAME": ^50}{"CHECKED": ^4}'
-                f'\n{"1": ^5}{"Tarefa teste": <50}{"X": ^4}')
+    expected = (f'{"ID": ^4}{"NAME": ^50}CHECKED'
+                f'\n{"1": ^3}{"Tarefa teste": <50}X')
     assert show(checkout(0)) == expected

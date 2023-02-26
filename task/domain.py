@@ -58,9 +58,9 @@ def rm(index: int) -> list[Task]:
 
 
 def show(tasks: list[Task]) -> str:
-    result = f'{"ID": ^5}{"NAME": ^50}{"CHECKED": ^4}'
+    result = f'{"ID": ^4}{"NAME": ^50}CHECKED'
     for task in tasks:
-        result += f'\n{task.id: ^5}{task.name: <50}{"V" if task.is_checked else "X": ^5}'
+        result += f'\n{task.id: ^3}{task.name: <50}{"V" if task.is_checked else "X"}'
     return result
 
 
