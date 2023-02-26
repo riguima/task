@@ -40,7 +40,7 @@ def commit(function: callable) -> callable:
 def checkout(index: int = -1) -> list[Task]:
     commits = list(map(lambda f: f.split('.')[0], os.listdir(get_commits_dir())))
     filename = get_commits_dir() / f'{sorted(commits)[index]}.json'
-    return list(map(lambda t: TaskSchema().load(t), json.load(open(filename, 'r'))))
+    return [TaskSchema().load(t) for t in json.load(open(filename, 'r'))]
 
 
 @commit
