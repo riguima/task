@@ -17,9 +17,3 @@ def test_rm() -> None:
 def test_checkout() -> None:
     assert len(checkout(0)) == 1
     assert checkout(0)[0].name == 'Tarefa teste'
-
-
-def test_show() -> None:
-    expected = (f'{"ID": ^4}{"NAME": ^50}CHECKED'
-                f'\n{"1": ^3}{"Tarefa teste": <50}X')
-    assert show(checkout(0)) == expected

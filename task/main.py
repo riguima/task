@@ -1,20 +1,20 @@
 from argparse import ArgumentParser
 from domain import *
-
-
-def run_command(args) -> None:
-    if args.command in ['rm']:
-        eval(f'{args.command}(int(args.value))')
-    else:
-        eval(f'{args.command}(args.value)')
+import sys
 
 
 if __name__ == '__main__':
     parser = ArgumentParser(prog='Task', description='Task taking')
     parser.add_argument('command', type=str)
-    parser.add_argument('value')
+    match sys.argv[1]:
+        case 'add':
+            parser.add_argument('value', type=str)
+        case 'rm':
+            parser.add_argument('value', type=int)
     args = parser.parse_args()
     try:
-        run_command(args)
+        eval(f'{args.command}(args.value)')
+    except AttributeError:
+        eval(f'{args.command}()')
     except NameError:
         print('Invalid command')

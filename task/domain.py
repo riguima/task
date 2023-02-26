@@ -57,11 +57,11 @@ def rm(index: int) -> list[Task]:
     return tasks
 
 
-def show(tasks: list[Task]) -> str:
-    result = f'{"ID": ^4}{"NAME": ^50}CHECKED'
-    for task in tasks:
-        result += f'\n{task.id: ^3}{task.name: <50}{"V" if task.is_checked else "X"}'
-    return result
+def show() -> None:
+    result = f'{"ID": ^10}{"NAME": ^50}CHECKED'
+    for task in checkout():
+        result += f'\n{task.id: ^10}{task.name: <50}{"V" if task.is_checked else "X": ^7}'
+    print(result)
 
 
 def get_commits_dir() -> Path:
