@@ -10,13 +10,13 @@ from pathlib import Path
 class Task:
     name: str
     is_checked: bool = False
-    created_at: datetime = datetime.now()
+    created_at: datetime = datetime.now().date()
 
 
 class TaskSchema(Schema):
     name = fields.Str()
     is_checked = fields.Bool()
-    created_at = fields.DateTime()
+    created_at = fields.Date()
 
     @post_load
     def make_task(self, data: dict, **kwargs) -> Task:
@@ -63,9 +63,9 @@ def rm(index: int) -> list[Task]:
 
 
 def show() -> None:
-    result = f'{"ID": ^10}{"NAME": ^50}CHECKED'
+    result = f'{"ID": ^10}{"NAME": ^50}{"CHECKED": ^7}{"CREATED AT": ^15}'
     for index, task in enumerate(checkout()):
-        result += f'\n{index: ^10}{task.name: <50}{"V" if task.is_checked else "X": ^7}'
+        result += f'\n{index: ^10}{task.name: <50}{"V" if task.is_checked else "X": ^7}{str(task.created_at): ^15}'
     print(result)
 
 
